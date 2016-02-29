@@ -18,7 +18,7 @@
         private static void EvaluateExpression(string expression)
         {
             expression = 
-                Regex.Replace(expression, @"^-?\d+\.?\d*|(?<=[-+\\*% ])-?\d+\.?\d*|[\/\+\*\-\/\%\(\)]|\d+\.?\d*", " $0 ").Trim();
+                Regex.Replace(expression, @"((?<=[\-\+\/\*\%\(\)\= ])|(?<=^))\-?\d+\.?(?:\d+)?", " $0 ").Trim();
 
             var postfixExpression = ToReversedPolishNotation(expression);
 
