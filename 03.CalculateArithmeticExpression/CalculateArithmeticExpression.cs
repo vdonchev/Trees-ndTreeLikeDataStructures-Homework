@@ -2,7 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Text.RegularExpressions;
+    using System.Threading;
 
     public static class CalculateArithmeticExpression
     {
@@ -10,6 +12,8 @@
 
         public static void Main()
         {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+
             Console.WriteLine("Insert your expression:");
             var expression = Console.ReadLine();
             EvaluateExpression(expression);
@@ -17,7 +21,7 @@
 
         private static void EvaluateExpression(string expression)
         {
-            expression = 
+            expression =
                 Regex.Replace(expression, @"((?<=[\-\+\/\*\%\(\)\= ])|(?<=^))\-?\d+\.?(?:\d+)?|[\(\)]", " $0 ").Trim();
 
             var postfixExpression = ToReversedPolishNotation(expression);
